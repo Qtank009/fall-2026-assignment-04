@@ -1,0 +1,322 @@
+<svg id="library-erd-svg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="erDiagram" viewBox="0 0 1020 740" style="max-width: 1020px; background-color: #ffffff; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <!-- Markers for ER cardinality -->
+    <marker id="onlyOneStart" class="marker onlyOne" refX="0" refY="9" markerWidth="18" markerHeight="18" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M9,0 L9,18 M15,0 L15,18" stroke="#334155" stroke-width="2" fill="none"/>
+    </marker>
+    <marker id="zeroOrOneEnd" class="marker zeroOrOne" refX="28" refY="9" markerWidth="30" markerHeight="18" orient="auto" markerUnits="userSpaceOnUse">
+      <circle cx="10" cy="9" r="5" stroke="#334155" stroke-width="2" fill="#ffffff"/>
+      <path d="M22,0 L22,18" stroke="#334155" stroke-width="2" fill="none"/>
+    </marker>
+    <marker id="zeroOrMoreEnd" class="marker zeroOrMore" refX="36" refY="18" markerWidth="40" markerHeight="36" orient="auto" markerUnits="userSpaceOnUse">
+      <circle cx="12" cy="18" r="5" stroke="#334155" stroke-width="2" fill="#ffffff"/>
+      <path d="M20,18 Q30,6 38,18 Q30,30 20,18" stroke="#334155" stroke-width="2" fill="none"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.08" flood-color="#0f172a"/>
+    </filter>
+  </defs>
+
+  <style>
+    .entity-card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; filter: url(#shadow); }
+    .header-users { fill: #3b82f6; rx: 8; }
+    .header-borrowers { fill: #0ea5e9; rx: 8; }
+    .header-authors { fill: #8b5cf6; rx: 8; }
+    .header-genres { fill: #ec4899; rx: 8; }
+    .header-books { fill: #10b981; rx: 8; }
+    .header-loans { fill: #f59e0b; rx: 8; }
+    .header-text { font-size: 14px; font-weight: 700; fill: #ffffff; letter-spacing: 0.05em; }
+    .row-even { fill: #ffffff; }
+    .row-odd { fill: #f8fafc; }
+    .attr-type { font-size: 11px; fill: #64748b; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .attr-name { font-size: 12px; fill: #1e293b; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .badge-pk { font-size: 10px; font-weight: 700; fill: #d97706; }
+    .badge-fk { font-size: 10px; font-weight: 700; fill: #2563eb; }
+    .badge-bg-pk { fill: #fef3c7; rx: 3; }
+    .badge-bg-fk { fill: #dbeafe; rx: 3; }
+    .rel-line { stroke: #475569; stroke-width: 1.8; fill: none; }
+    .rel-box { fill: #ffffff; stroke: #94a3b8; stroke-width: 1; rx: 4; }
+    .rel-text { font-size: 11px; fill: #334155; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+    .divider { stroke: #e2e8f0; stroke-width: 1; }
+  </style>
+
+  <!-- ================= RELATIONSHIP PATHS ================= -->
+
+  <!-- USERS to BORROWERS (registers as) -->
+  <path d="M 170 185 L 170 260" class="rel-line" marker-start="url(#onlyOneStart)" marker-end="url(#zeroOrOneEnd)"/>
+  <rect x="125" y="212" width="90" height="20" class="rel-box"/>
+  <text x="170" y="222" class="rel-text">registers as</text>
+
+  <!-- AUTHORS to BOOKS (writes) -->
+  <path d="M 490 165 C 490 200, 600 190, 600 240" class="rel-line" marker-start="url(#onlyOneStart)" marker-end="url(#zeroOrMoreEnd)"/>
+  <rect x="515" y="185" width="55" height="20" class="rel-box"/>
+  <text x="542" y="195" class="rel-text">writes</text>
+
+  <!-- GENRES to BOOKS (classifies) -->
+  <path d="M 830 165 C 830 195, 780 200, 780 240" class="rel-line" marker-start="url(#onlyOneStart)" marker-end="url(#zeroOrMoreEnd)"/>
+  <rect x="775" y="188" width="65" height="20" class="rel-box"/>
+  <text x="807" y="198" class="rel-text">classifies</text>
+
+  <!-- BORROWERS to LOANS (borrows) -->
+  <path d="M 230 450 C 230 490, 310 490, 350 510" class="rel-line" marker-start="url(#onlyOneStart)" marker-end="url(#zeroOrMoreEnd)"/>
+  <rect x="255" y="475" width="60" height="20" class="rel-box"/>
+  <text x="285" y="485" class="rel-text">borrows</text>
+
+  <!-- BOOKS to LOANS (is subject of) -->
+  <path d="M 640 470 C 640 500, 570 480, 520 510" class="rel-line" marker-start="url(#onlyOneStart)" marker-end="url(#zeroOrMoreEnd)"/>
+  <rect x="545" y="482" width="85" height="20" class="rel-box"/>
+  <text x="587" y="492" class="rel-text">is subject of</text>
+
+
+  <!-- ================= ENTITY CARDS ================= -->
+
+  <!-- ENTITY: USERS (Pre-existing) -->
+  <g id="entity-USERS" transform="translate(50, 40)">
+    <rect width="240" height="145" class="entity-card"/>
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-users"/>
+    <text x="12" y="21" class="header-text">USERS</text>
+    <text x="228" y="21" class="header-text" font-size="10" font-weight="400" text-anchor="end" fill="#dbeafe">(Pre-existing)</text>
+
+    <!-- Row 1: id PK -->
+    <rect y="32" width="240" height="28" class="row-even"/>
+    <text x="14" y="50" class="attr-type">int</text>
+    <text x="80" y="50" class="attr-name">id</text>
+    <rect x="200" y="38" width="26" height="16" class="badge-bg-pk"/>
+    <text x="213" y="50" class="badge-pk" text-anchor="middle">PK</text>
+    <line x1="0" y1="60" x2="240" y2="60" class="divider"/>
+
+    <!-- Row 2: email -->
+    <rect y="60" width="240" height="28" class="row-odd"/>
+    <text x="14" y="78" class="attr-type">string</text>
+    <text x="80" y="78" class="attr-name">email</text>
+    <line x1="0" y1="88" x2="240" y2="88" class="divider"/>
+
+    <!-- Row 3: name -->
+    <rect y="88" width="240" height="28" class="row-even"/>
+    <text x="14" y="106" class="attr-type">string</text>
+    <text x="80" y="106" class="attr-name">name</text>
+    <line x1="0" y1="116" x2="240" y2="116" class="divider"/>
+
+    <!-- Row 4: created_at -->
+    <rect y="116" width="240" height="28" class="row-odd"/>
+    <text x="14" y="134" class="attr-type">timestamp</text>
+    <text x="80" y="134" class="attr-name">created_at</text>
+  </g>
+
+
+  <!-- ENTITY: BORROWERS -->
+  <g id="entity-BORROWERS" transform="translate(50, 260)">
+    <rect width="240" height="201" class="entity-card"/>
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-borrowers"/>
+    <text x="12" y="21" class="header-text">BORROWERS</text>
+
+    <!-- Row 1: id PK -->
+    <rect y="32" width="240" height="28" class="row-even"/>
+    <text x="14" y="50" class="attr-type">int</text>
+    <text x="80" y="50" class="attr-name">id</text>
+    <rect x="200" y="38" width="26" height="16" class="badge-bg-pk"/>
+    <text x="213" y="50" class="badge-pk" text-anchor="middle">PK</text>
+    <line x1="0" y1="60" x2="240" y2="60" class="divider"/>
+
+    <!-- Row 2: user_id FK -->
+    <rect y="60" width="240" height="28" class="row-odd"/>
+    <text x="14" y="78" class="attr-type">int</text>
+    <text x="80" y="78" class="attr-name">user_id</text>
+    <rect x="200" y="66" width="26" height="16" class="badge-bg-fk"/>
+    <text x="213" y="78" class="badge-fk" text-anchor="middle">FK</text>
+    <line x1="0" y1="88" x2="240" y2="88" class="divider"/>
+
+    <!-- Row 3: card_number -->
+    <rect y="88" width="240" height="28" class="row-even"/>
+    <text x="14" y="106" class="attr-type">string</text>
+    <text x="80" y="106" class="attr-name">card_number</text>
+    <line x1="0" y1="116" x2="240" y2="116" class="divider"/>
+
+    <!-- Row 4: phone -->
+    <rect y="116" width="240" height="28" class="row-odd"/>
+    <text x="14" y="134" class="attr-type">string</text>
+    <text x="80" y="134" class="attr-name">phone</text>
+    <line x1="0" y1="144" x2="240" y2="144" class="divider"/>
+
+    <!-- Row 5: status -->
+    <rect y="144" width="240" height="28" class="row-even"/>
+    <text x="14" y="162" class="attr-type">string</text>
+    <text x="80" y="162" class="attr-name">status</text>
+    <line x1="0" y1="172" x2="240" y2="172" class="divider"/>
+
+    <!-- Row 6: created_at -->
+    <rect y="172" width="240" height="28" class="row-odd"/>
+    <text x="14" y="190" class="attr-type">timestamp</text>
+    <text x="80" y="190" class="attr-name">created_at</text>
+  </g>
+
+
+  <!-- ENTITY: AUTHORS -->
+  <g id="entity-AUTHORS" transform="translate(370, 40)">
+    <rect width="240" height="117" class="entity-card"/>
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-authors"/>
+    <text x="12" y="21" class="header-text">AUTHORS</text>
+
+    <!-- Row 1: id PK -->
+    <rect y="32" width="240" height="28" class="row-even"/>
+    <text x="14" y="50" class="attr-type">int</text>
+    <text x="80" y="50" class="attr-name">id</text>
+    <rect x="200" y="38" width="26" height="16" class="badge-bg-pk"/>
+    <text x="213" y="50" class="badge-pk" text-anchor="middle">PK</text>
+    <line x1="0" y1="60" x2="240" y2="60" class="divider"/>
+
+    <!-- Row 2: name -->
+    <rect y="60" width="240" height="28" class="row-odd"/>
+    <text x="14" y="78" class="attr-type">string</text>
+    <text x="80" y="78" class="attr-name">name</text>
+    <line x1="0" y1="88" x2="240" y2="88" class="divider"/>
+
+    <!-- Row 3: bio -->
+    <rect y="88" width="240" height="28" class="row-even"/>
+    <text x="14" y="106" class="attr-type">string</text>
+    <text x="80" y="106" class="attr-name">bio</text>
+  </g>
+
+
+  <!-- ENTITY: GENRES -->
+  <g id="entity-GENRES" transform="translate(710, 40)">
+    <rect width="240" height="117" class="entity-card"/>
+    <path d="M 0 0 L 240 0 L 240 32 L 0 32 Z" class="header-genres"/>
+    <text x="12" y="21" class="header-text">GENRES</text>
+
+    <!-- Row 1: id PK -->
+    <rect y="32" width="240" height="28" class="row-even"/>
+    <text x="14" y="50" class="attr-type">int</text>
+    <text x="80" y="50" class="attr-name">id</text>
+    <rect x="200" y="38" width="26" height="16" class="badge-bg-pk"/>
+    <text x="213" y="50" class="badge-pk" text-anchor="middle">PK</text>
+    <line x1="0" y1="60" x2="240" y2="60" class="divider"/>
+
+    <!-- Row 2: name -->
+    <rect y="60" width="240" height="28" class="row-odd"/>
+    <text x="14" y="78" class="attr-type">string</text>
+    <text x="80" y="78" class="attr-name">name</text>
+    <line x1="0" y1="88" x2="240" y2="88" class="divider"/>
+
+    <!-- Row 3: description -->
+    <rect y="88" width="240" height="28" class="row-even"/>
+    <text x="14" y="106" class="attr-type">string</text>
+    <text x="80" y="106" class="attr-name">description</text>
+  </g>
+
+
+  <!-- ENTITY: BOOKS -->
+  <g id="entity-BOOKS" transform="translate(560, 240)">
+    <rect width="290" height="257" class="entity-card"/>
+    <path d="M 0 0 L 290 0 L 290 32 L 0 32 Z" class="header-books"/>
+    <text x="12" y="21" class="header-text">BOOKS</text>
+
+    <!-- Row 1: id PK -->
+    <rect y="32" width="290" height="28" class="row-even"/>
+    <text x="14" y="50" class="attr-type">int</text>
+    <text x="90" y="50" class="attr-name">id</text>
+    <rect x="250" y="38" width="26" height="16" class="badge-bg-pk"/>
+    <text x="263" y="50" class="badge-pk" text-anchor="middle">PK</text>
+    <line x1="0" y1="60" x2="290" y2="60" class="divider"/>
+
+    <!-- Row 2: title -->
+    <rect y="60" width="290" height="28" class="row-odd"/>
+    <text x="14" y="78" class="attr-type">string</text>
+    <text x="90" y="78" class="attr-name">title</text>
+    <line x1="0" y1="88" x2="290" y2="88" class="divider"/>
+
+    <!-- Row 3: isbn -->
+    <rect y="88" width="290" height="28" class="row-even"/>
+    <text x="14" y="106" class="attr-type">string</text>
+    <text x="90" y="106" class="attr-name">isbn</text>
+    <line x1="0" y1="116" x2="290" y2="116" class="divider"/>
+
+    <!-- Row 4: author_id FK -->
+    <rect y="116" width="290" height="28" class="row-odd"/>
+    <text x="14" y="134" class="attr-type">int</text>
+    <text x="90" y="134" class="attr-name">author_id</text>
+    <rect x="250" y="122" width="26" height="16" class="badge-bg-fk"/>
+    <text x="263" y="134" class="badge-fk" text-anchor="middle">FK</text>
+    <line x1="0" y1="144" x2="290" y2="144" class="divider"/>
+
+    <!-- Row 5: genre_id FK -->
+    <rect y="144" width="290" height="28" class="row-even"/>
+    <text x="14" y="162" class="attr-type">int</text>
+    <text x="90" y="162" class="attr-name">genre_id</text>
+    <rect x="250" y="150" width="26" height="16" class="badge-bg-fk"/>
+    <text x="263" y="162" class="badge-fk" text-anchor="middle">FK</text>
+    <line x1="0" y1="172" x2="290" y2="172" class="divider"/>
+
+    <!-- Row 6: published_year -->
+    <rect y="172" width="290" height="28" class="row-odd"/>
+    <text x="14" y="190" class="attr-type">int</text>
+    <text x="90" y="190" class="attr-name">published_year</text>
+    <line x1="0" y1="200" x2="290" y2="200" class="divider"/>
+
+    <!-- Row 7: total_copies -->
+    <rect y="200" width="290" height="28" class="row-even"/>
+    <text x="14" y="218" class="attr-type">int</text>
+    <text x="90" y="218" class="attr-name">total_copies</text>
+    <line x1="0" y1="228" x2="290" y2="228" class="divider"/>
+
+    <!-- Row 8: available_copies -->
+    <rect y="228" width="290" height="28" class="row-odd"/>
+    <text x="14" y="246" class="attr-type">int</text>
+    <text x="90" y="246" class="attr-name">available_copies</text>
+  </g>
+
+
+  <!-- ENTITY: LOANS -->
+  <g id="entity-LOANS" transform="translate(310, 510)">
+    <rect width="280" height="229" class="entity-card"/>
+    <path d="M 0 0 L 280 0 L 280 32 L 0 32 Z" class="header-loans"/>
+    <text x="12" y="21" class="header-text">LOANS</text>
+
+    <!-- Row 1: id PK -->
+    <rect y="32" width="280" height="28" class="row-even"/>
+    <text x="14" y="50" class="attr-type">int</text>
+    <text x="90" y="50" class="attr-name">id</text>
+    <rect x="240" y="38" width="26" height="16" class="badge-bg-pk"/>
+    <text x="253" y="50" class="badge-pk" text-anchor="middle">PK</text>
+    <line x1="0" y1="60" x2="280" y2="60" class="divider"/>
+
+    <!-- Row 2: borrower_id FK -->
+    <rect y="60" width="280" height="28" class="row-odd"/>
+    <text x="14" y="78" class="attr-type">int</text>
+    <text x="90" y="78" class="attr-name">borrower_id</text>
+    <rect x="240" y="66" width="26" height="16" class="badge-bg-fk"/>
+    <text x="253" y="78" class="badge-fk" text-anchor="middle">FK</text>
+    <line x1="0" y1="88" x2="280" y2="88" class="divider"/>
+
+    <!-- Row 3: book_id FK -->
+    <rect y="88" width="280" height="28" class="row-even"/>
+    <text x="14" y="106" class="attr-type">int</text>
+    <text x="90" y="106" class="attr-name">book_id</text>
+    <rect x="240" y="94" width="26" height="16" class="badge-bg-fk"/>
+    <text x="253" y="106" class="badge-fk" text-anchor="middle">FK</text>
+    <line x1="0" y1="116" x2="280" y2="116" class="divider"/>
+
+    <!-- Row 4: loan_date -->
+    <rect y="116" width="280" height="28" class="row-odd"/>
+    <text x="14" y="134" class="attr-type">date</text>
+    <text x="90" y="134" class="attr-name">loan_date</text>
+    <line x1="0" y1="144" x2="280" y2="144" class="divider"/>
+
+    <!-- Row 5: due_date -->
+    <rect y="144" width="280" height="28" class="row-even"/>
+    <text x="14" y="162" class="attr-type">date</text>
+    <text x="90" y="162" class="attr-name">due_date</text>
+    <line x1="0" y1="172" x2="280" y2="172" class="divider"/>
+
+    <!-- Row 6: return_date -->
+    <rect y="172" width="280" height="28" class="row-odd"/>
+    <text x="14" y="190" class="attr-type">date</text>
+    <text x="90" y="190" class="attr-name">return_date</text>
+    <line x1="0" y1="200" x2="280" y2="200" class="divider"/>
+
+    <!-- Row 7: status -->
+    <rect y="200" width="280" height="28" class="row-even"/>
+    <text x="14" y="218" class="attr-type">string</text>
+    <text x="90" y="218" class="attr-name">status</text>
+  </g>
+</svg>
